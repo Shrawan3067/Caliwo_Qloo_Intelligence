@@ -176,6 +176,15 @@ class MealLogInput(BaseModel):
     foods: Optional[List[Any]] = None
     logged_at: Optional[str] = None
 
+    # Qloo Cultural Intelligence Telemetry
+    bio_cultural_score: Optional[int] = None
+    cultural_meta: Optional[dict] = None
+    cultural_inspiration: Optional[str] = None
+    restaurant_anchor: Optional[str] = None
+    venue_name: Optional[str] = None
+    cuisine: Optional[str] = None
+    qloo_entity_id: Optional[str] = None
+
 
 class MealUpdateInput(BaseModel):
     title: Optional[str] = None
@@ -848,6 +857,20 @@ async def log_meal(
         except Exception:
             pass # Ignore failures for legacy base64 to prevent breaking the flow entirely if image processing fails
 
+    cultural_meta = dict(inp.cultural_meta or {})
+    if inp.cultural_inspiration and "cultural_inspiration" not in cultural_meta:
+        cultural_meta["cultural_inspiration"] = inp.cultural_inspiration
+    if inp.restaurant_anchor and "restaurant_anchor" not in cultural_meta:
+        cultural_meta["restaurant_anchor"] = inp.restaurant_anchor
+    if inp.venue_name and "venue_name" not in cultural_meta:
+        cultural_meta["venue_name"] = inp.venue_name
+    if inp.cuisine and "cuisine" not in cultural_meta:
+        cultural_meta["cuisine"] = inp.cuisine
+    if inp.qloo_entity_id and "qloo_entity_id" not in cultural_meta:
+        cultural_meta["qloo_entity_id"] = inp.qloo_entity_id
+    if inp.bio_cultural_score is not None and "bio_cultural_score" not in cultural_meta:
+        cultural_meta["bio_cultural_score"] = inp.bio_cultural_score
+
     new_meal = Meal(
         meal_id=meal_id,
         user_id=user.id,
@@ -868,6 +891,8 @@ async def log_meal(
         image_content_type=image_content_type,
         image_size_bytes=image_size_bytes,
         image_uploaded_at=image_uploaded_at,
+        cultural_meta=cultural_meta,
+        bio_cultural_score=inp.bio_cultural_score,
         ingredients=inp.foods or [],
         logged_at=logged_at
     )
@@ -1001,13 +1026,22 @@ async def list_meals(
 
     items = []
     for m in meals:
+        cultural_meta = getattr(m, "cultural_meta", None) or {}
+        if not isinstance(cultural_meta, dict):
+            cultural_meta = {}
         img_meta = getattr(m, "image_metadata", None) or {}
-        if not isinstance(img_meta, dict):
-            img_meta = {}
-        bio_cultural_score = img_meta.get("bio_cultural_score")
-        if not bio_cultural_score:
-            seed_val = sum(ord(c) for c in (m.title or "Meal")) + int(m.calories or 500)
-            bio_cultural_score = 90 + (seed_val % 7)  # 90 to 96%
+        if isinstance(img_meta, dict):
+            for k, v in img_meta.items():
+                if k not in cultural_meta:
+                    cultural_meta[k] = v
+
+        bio_cultural_score = (
+            getattr(m, "bio_cultural_score", None)
+            or cultural_meta.get("bio_cultural_score")
+            or img_meta.get("bio_cultural_score")
+        )
+        if bio_cultural_score is None:
+            bio_cultural_score = 94
 
         items.append({
             "meal_id": m.meal_id,
@@ -1027,7 +1061,7 @@ async def list_meals(
             "image_height": getattr(m, "image_height", None),
             "logged_at": _format_utc_iso(m.logged_at),
             "bio_cultural_score": int(bio_cultural_score),
-            "cultural_meta": img_meta,
+            "cultural_meta": cultural_meta,
         })
 
     # H10: Return next_cursor for pagination
@@ -1046,13 +1080,22 @@ async def get_meal(
     if not meal:
         raise HTTPException(status_code=404, detail="Meal not found")
 
+    cultural_meta = getattr(meal, "cultural_meta", None) or {}
+    if not isinstance(cultural_meta, dict):
+        cultural_meta = {}
     img_meta = getattr(meal, "image_metadata", None) or {}
-    if not isinstance(img_meta, dict):
-        img_meta = {}
-    bio_cultural_score = img_meta.get("bio_cultural_score")
-    if not bio_cultural_score:
-        seed_val = sum(ord(c) for c in (meal.title or "Meal")) + int(meal.calories or 500)
-        bio_cultural_score = 90 + (seed_val % 7)
+    if isinstance(img_meta, dict):
+        for k, v in img_meta.items():
+            if k not in cultural_meta:
+                cultural_meta[k] = v
+
+    bio_cultural_score = (
+        getattr(meal, "bio_cultural_score", None)
+        or cultural_meta.get("bio_cultural_score")
+        or img_meta.get("bio_cultural_score")
+    )
+    if bio_cultural_score is None:
+        bio_cultural_score = 94
 
     return {
         "meal_id": meal.meal_id,
@@ -1074,7 +1117,7 @@ async def get_meal(
         "image_height": getattr(meal, "image_height", None),
         "logged_at": _format_utc_iso(meal.logged_at),
         "bio_cultural_score": int(bio_cultural_score),
-        "cultural_meta": img_meta,
+        "cultural_meta": cultural_meta,
     }
 
 

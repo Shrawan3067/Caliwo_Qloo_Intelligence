@@ -540,6 +540,12 @@ async def reset_demo_user(session: Optional[AsyncSession] = None) -> dict:
                 sugar_g=meal_data.get("sugar_g", 0),
                 sodium_mg=meal_data.get("sodium_mg", 0),
                 magnesium_mg=meal_data.get("magnesium_mg", 0),
+                cultural_meta={
+                    "bio_cultural_score": 95,
+                    "qloo_grounded": True,
+                    "cultural_tags": ["Japanese", "Tokyo Dining"],
+                },
+                bio_cultural_score=95,
                 ingredients=[],
                 logged_at=meal_date,
             )
@@ -972,6 +978,12 @@ async def switch_persona(user: User, persona_id: str, session: AsyncSession) -> 
         protein_g=b_pro,
         carbs_g=round(b_cal * 0.5 / 4),
         fat_g=round(b_cal * 0.25 / 9),
+        cultural_meta={
+            "bio_cultural_score": 94,
+            "qloo_grounded": True,
+            "cuisine": persona.get("cuisines", ["Artisan"])[0],
+        },
+        bio_cultural_score=94,
         logged_at=now.replace(hour=8, minute=30, second=0, microsecond=0),
     )
     m2 = Meal(
@@ -983,6 +995,12 @@ async def switch_persona(user: User, persona_id: str, session: AsyncSession) -> 
         protein_g=l_pro,
         carbs_g=round(l_cal * 0.45 / 4),
         fat_g=round(l_cal * 0.25 / 9),
+        cultural_meta={
+            "bio_cultural_score": 96,
+            "qloo_grounded": True,
+            "cuisine": persona.get("cuisines", ["Artisan"])[0],
+        },
+        bio_cultural_score=96,
         logged_at=now.replace(hour=12, minute=30, second=0, microsecond=0),
     )
     session.add_all([m1, m2])

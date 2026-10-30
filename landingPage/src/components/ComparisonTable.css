@@ -1,0 +1,125 @@
+.comparison-section {
+  background-color: #ffffff;
+}
+
+.comparison-table-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.comparison-table th {
+  padding: 22px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.th-feature {
+  width: 25%;
+  color: var(--text-muted);
+  background: #f8fafc;
+}
+
+.th-caliwo {
+  width: 45%;
+  background: #FFF0E5;
+  color: #C44800;
+  font-size: 1.1rem !important;
+}
+
+.th-others {
+  width: 30%;
+  color: #94a3b8;
+  background: #f8fafc;
+}
+
+.comparison-table td {
+  padding: 20px 24px;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.td-feature {
+  font-weight: 700;
+  color: var(--text-main);
+  background: #ffffff;
+}
+
+.td-caliwo {
+  background: rgba(255, 240, 229, 0.5);
+  font-weight: 600;
+  color: #A33B00;
+}
+
+.td-others {
+  color: #64748b;
+  background: #ffffff;
+}
+
+.td-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.check-icon-bg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FF5E00;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cross-icon-bg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .comparison-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparison-table {
+    min-width: 560px;
+  }
+
+  .comparison-table th, .comparison-table td {
+    padding: 14px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .comparison-table th, .comparison-table td {
+    padding: 12px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .td-cell {
+    gap: 8px;
+  }
+}

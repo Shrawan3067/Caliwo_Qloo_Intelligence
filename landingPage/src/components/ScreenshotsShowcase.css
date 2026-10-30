@@ -1,0 +1,1295 @@
+/* ==========================================================================
+   Screenshots Showcase - Ultra-Premium Mobile Showcase
+   ========================================================================== */
+
+.screenshots-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Category Filter Pills */
+.screens-filter-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.filter-btn:hover {
+  color: #0f172a;
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+.filter-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+}
+
+/* Horizontal Device Track */
+.screens-scroll-container {
+  overflow-x: auto;
+  padding: 30px 0 50px;
+  margin: 0 -24px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screens-track {
+  display: flex;
+  gap: 32px;
+  padding: 0 48px;
+  width: max-content;
+}
+
+.screen-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.screen-card-item:hover {
+  transform: translateY(-10px);
+}
+
+/* ==========================================================================
+   Titanium iPhone Device Frame
+   ========================================================================== */
+
+.titanium-phone-frame {
+  width: 270px;
+  height: 560px;
+  background: #0f172a;
+  border-radius: 46px;
+  padding: 9px;
+  position: relative;
+  box-shadow:
+    0 25px 60px -12px rgba(15, 23, 42, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 0 0 2px #334155;
+  transition: box-shadow 0.3s ease;
+}
+
+.screen-card-item:hover .titanium-phone-frame {
+  box-shadow:
+    0 35px 70px -12px rgba(255, 94, 0, 0.2),
+    0 0 0 1.5px rgba(255, 94, 0, 0.4),
+    inset 0 0 0 2px #475569;
+}
+
+/* Outer Hardware Buttons */
+.hw-button {
+  position: absolute;
+  background: #1e293b;
+  border-radius: 2px;
+}
+
+.hw-action {
+  left: -2px;
+  top: 90px;
+  width: 3px;
+  height: 22px;
+}
+
+.hw-volume-up {
+  left: -2px;
+  top: 125px;
+  width: 3px;
+  height: 40px;
+}
+
+.hw-volume-down {
+  left: -2px;
+  top: 175px;
+  width: 3px;
+  height: 40px;
+}
+
+.hw-power {
+  right: -2px;
+  top: 130px;
+  width: 3px;
+  height: 60px;
+}
+
+/* Phone Screen Display Screen */
+.phone-screen-display {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 38px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dynamic Island Pill */
+.dynamic-island-pill {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: #000000;
+  border-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.camera-lens {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Subtle Screen Glare Overlay */
+.screen-glare-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* Phone UI Container */
+.phone-ui {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 38px 12px 14px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  user-select: none;
+}
+
+/* Status Bar */
+.phone-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #0f172a;
+  padding: 0 4px;
+  margin-bottom: 8px;
+}
+
+.phone-status-bar.text-white {
+  color: #ffffff;
+}
+
+.phone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.battery-pill {
+  font-size: 0.6rem;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.phone-status-bar.text-white .battery-pill {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Screen 1: Dashboard UI
+   ========================================================================== */
+
+.phone-ui-dashboard {
+  background: linear-gradient(180deg, #feebd3 0%, #e1eafa 40%, #ffffff 80%);
+}
+
+.phone-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.phone-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.phone-brand-icon {
+  font-size: 16px;
+}
+
+.phone-brand-title {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #0f172a;
+  display: block;
+  line-height: 1.1;
+}
+
+.phone-greeting {
+  font-size: 0.6rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.phone-streak-badge {
+  background: #ffe4e6;
+  color: #e11d48;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* Calorie Card */
+.phone-calorie-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  margin-bottom: 10px;
+}
+
+.calorie-ring-circle {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: conic-gradient(#ff5e00 0% 70%, #f1f5f9 70% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-inner-cutout {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-number {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.ring-label {
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.4px;
+}
+
+.calorie-side-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pill-dot.orange {
+  background: #ff5e00;
+}
+.pill-dot.blue {
+  background: #0284c7;
+}
+
+.stat-sm-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: block;
+}
+
+.stat-sm-lbl {
+  font-size: 0.55rem;
+  color: #64748b;
+}
+
+/* Macro Grid */
+.phone-macro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.macro-card-mini {
+  background: #ffffff;
+  padding: 8px 6px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.macro-tag {
+  font-size: 0.5rem;
+  font-weight: 800;
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+.macro-p .macro-tag {
+  color: #10b981;
+}
+.macro-c .macro-tag {
+  color: #0284c7;
+}
+.macro-f .macro-tag {
+  color: #8b5cf6;
+}
+
+.macro-g {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: block;
+  margin: 2px 0 4px;
+}
+
+.macro-bar {
+  height: 4px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.p-fill {
+  background: #10b981;
+}
+.c-fill {
+  background: #0284c7;
+}
+.f-fill {
+  background: #8b5cf6;
+}
+
+/* Recent Meal Card */
+.phone-recent-meal-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.meal-thumb-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.meal-card-details {
+  flex: 1;
+}
+
+.meal-card-title {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: block;
+}
+
+.meal-card-time {
+  font-size: 0.55rem;
+  color: #64748b;
+  display: block;
+}
+
+.meal-card-macros {
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #ff5e00;
+}
+
+.meal-cal-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: #fff7ed;
+  color: #ff5e00;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Screen 2: AI Scanner UI
+   ========================================================================== */
+
+.phone-ui-scanner {
+  background: #090d16;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+.phone-ui-scanner .phone-status-bar {
+  padding: 0 12px;
+}
+
+.scanner-viewport {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-live-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.ar-scan-box {
+  position: absolute;
+  top: 15%;
+  left: 12%;
+  right: 12%;
+  bottom: 25%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+}
+
+.scan-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: #ff5e00;
+}
+
+.scan-corner.tl {
+  top: -1px;
+  left: -1px;
+  border-top: 3px solid #ff5e00;
+  border-left: 3px solid #ff5e00;
+  border-top-left-radius: 10px;
+}
+.scan-corner.tr {
+  top: -1px;
+  right: -1px;
+  border-top: 3px solid #ff5e00;
+  border-right: 3px solid #ff5e00;
+  border-top-right-radius: 10px;
+}
+.scan-corner.bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 3px solid #ff5e00;
+  border-left: 3px solid #ff5e00;
+  border-bottom-left-radius: 10px;
+}
+.scan-corner.br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 3px solid #ff5e00;
+  border-right: 3px solid #ff5e00;
+  border-bottom-right-radius: 10px;
+}
+
+.laser-scanner-line {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ff5e00, transparent);
+  box-shadow: 0 0 10px #ff5e00;
+  animation: scanLaser 2s ease-in-out infinite;
+}
+
+@keyframes scanLaser {
+  0%,
+  100% {
+    top: 15%;
+  }
+  50% {
+    top: 80%;
+  }
+}
+
+.ai-recognition-pill {
+  position: absolute;
+  top: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sparkle-gold {
+  color: #f59e0b;
+}
+
+/* Scanner Sheet */
+.scanner-result-sheet {
+  background: #ffffff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 10px 12px 14px;
+  position: relative;
+  z-index: 10;
+}
+
+.sheet-handle {
+  width: 32px;
+  height: 3px;
+  background: #cbd5e1;
+  border-radius: 999px;
+  margin: 0 auto 8px;
+}
+
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.sheet-header h4 {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.sheet-weight {
+  font-size: 0.55rem;
+  color: #64748b;
+}
+
+.sheet-calories {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #ff5e00;
+}
+
+.sheet-macros-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.pill-metric {
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.pill-metric.green {
+  background: #ecfdf5;
+  color: #065f46;
+}
+.pill-metric.blue {
+  background: #eff6ff;
+  color: #1e40af;
+}
+.pill-metric.purple {
+  background: #faf5ff;
+  color: #6b21a8;
+}
+
+.sheet-log-btn {
+  width: 100%;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Screen 3: AI Coach Chat UI
+   ========================================================================== */
+
+.phone-ui-coach {
+  background: #f8fafc;
+}
+
+.coach-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 8px 10px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.coach-avatar-wrap {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff0e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 1.5px solid #ffffff;
+}
+
+.coach-name {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: block;
+  line-height: 1.1;
+}
+
+.coach-status {
+  font-size: 0.55rem;
+  color: #10b981;
+  font-weight: 600;
+}
+
+.chat-stream {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 8px 10px;
+  border-radius: 14px;
+  font-size: 0.65rem;
+  line-height: 1.35;
+}
+
+.bubble-user {
+  align-self: flex-end;
+  background: #0f172a;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.bubble-coach {
+  align-self: flex-start;
+  background: #ffffff;
+  color: #1e293b;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.coach-bubble-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 800;
+  color: #ff5e00;
+  font-size: 0.6rem;
+  margin-bottom: 4px;
+}
+
+.coach-food-option {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.55rem;
+}
+
+.chat-fake-input {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+.send-arrow {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ff5e00;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   Screen 4: Analytics UI
+   ========================================================================== */
+
+.phone-ui-analytics {
+  background: #ffffff;
+}
+
+.analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.analytics-header h4 {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.analytics-pill {
+  font-size: 0.55rem;
+  background: #f1f5f9;
+  color: #64748b;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.analytics-chart-card {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.chart-stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.chart-big-val {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #0f172a;
+  display: block;
+  line-height: 1;
+}
+
+.chart-big-lbl {
+  font-size: 0.55rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.consistency-badge {
+  font-size: 0.55rem;
+  font-weight: 800;
+  background: #ecfdf5;
+  color: #065f46;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.trend-svg {
+  width: 100%;
+  height: 55px;
+}
+
+.chart-days-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.macro-split-card {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.macro-split-card h5 {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px;
+}
+
+.split-progress-bar {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.bar-seg {
+  height: 100%;
+}
+.seg-p {
+  background: #10b981;
+}
+.seg-c {
+  background: #0284c7;
+}
+.seg-f {
+  background: #8b5cf6;
+}
+
+.split-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.split-labels .dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 2px;
+}
+
+.dot.p {
+  background: #10b981;
+}
+.dot.c {
+  background: #0284c7;
+}
+.dot.f {
+  background: #8b5cf6;
+}
+
+/* ==========================================================================
+   Screen 5: Recipes UI
+   ========================================================================== */
+
+.phone-ui-recipes {
+  background: #ffffff;
+}
+
+.recipes-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.recipes-top h4 {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.recipe-filter-tag {
+  font-size: 0.55rem;
+  background: #fff7ed;
+  color: #ff5e00;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.recipe-hero-item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 130px;
+  margin-bottom: 8px;
+}
+
+.recipe-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+}
+
+.recipe-tag-pill {
+  font-size: 0.5rem;
+  font-weight: 800;
+  background: rgba(255, 94, 0, 0.85);
+  padding: 2px 6px;
+  border-radius: 4px;
+  align-self: flex-start;
+  margin-bottom: 2px;
+}
+
+.recipe-overlay h5 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin: 0 0 3px;
+  line-height: 1.15;
+}
+
+.recipe-macro-row {
+  display: flex;
+  gap: 6px;
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+
+.recipe-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.recipe-mini-icon {
+  font-size: 18px;
+}
+
+.recipe-mini-info h6 {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.recipe-mini-info span {
+  font-size: 0.55rem;
+  color: #64748b;
+}
+
+/* ==========================================================================
+   Screen 6: Weight & Milestones UI
+   ========================================================================== */
+
+.phone-ui-weight {
+  background: #ffffff;
+}
+
+.weight-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 10px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+}
+
+.weight-eyebrow {
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: #64748b;
+  display: block;
+}
+
+.weight-big-num {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.weight-big-num .unit {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.bmi-pill-badge {
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 0.55rem;
+  font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.goal-milestone-card {
+  background: #fef3c7;
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.goal-trophy {
+  font-size: 18px;
+}
+
+.goal-title {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #92400e;
+  display: block;
+}
+
+.goal-sub {
+  font-size: 0.55rem;
+  color: #b45309;
+  font-weight: 600;
+}
+
+.weight-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.weight-log-row {
+  display: flex;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.6rem;
+  color: #64748b;
+}
+
+.weight-log-row strong {
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   Bottom Card Info & Zoom Modal
+   ========================================================================== */
+
+.screen-card-info {
+  text-align: center;
+  max-width: 240px;
+}
+
+.screen-pill-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #ff5e00;
+  background: #fff0e5;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.screen-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.screen-card-subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.3;
+}
+
+/* Zoom Modal */
+.screenshot-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: modalFadeIn 0.25s ease;
+}
+
+.screenshot-modal-content {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 32px;
+  max-width: 760px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  position: relative;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.4);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.modal-phone-scale {
+  width: 290px;
+  height: 600px;
+}
+
+.modal-screen-details {
+  flex: 1;
+}
+
+.modal-screen-details h3 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 12px 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.modal-screen-details p {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.modal-cta-btn {
+  padding: 14px 28px;
+  font-size: 1rem;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .screenshot-modal-content {
+    flex-direction: column;
+    padding: 24px;
+    gap: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-phone-scale {
+    width: 240px;
+    height: 500px;
+  }
+}

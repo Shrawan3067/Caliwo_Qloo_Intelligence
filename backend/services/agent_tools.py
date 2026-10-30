@@ -192,11 +192,12 @@ def _safe_str_list(val: Any) -> list[str]:
 
 async def _safe_get_nutrition_gaps(session: Optional[AsyncSession], user: User) -> dict[str, Any]:
     """Retrieve daily nutrition gaps safely; falls back to user profile goals if session is None or DB fails."""
-    if session is not None:
-        try:
-            return await get_nutrition_gaps(session, user)
-        except Exception as e:
-            logger.warning("Failed to fetch nutrition gaps from DB session: %s", e)
+    try:
+        res = await get_nutrition_gaps(session, user)  # type: ignore
+        if res and isinstance(res, dict) and res.get("gaps"):
+            return res
+    except Exception as e:
+        logger.debug("get_nutrition_gaps fallback: %s", e)
 
     # Safe fallback using user.profile
     profile = user.profile if isinstance(user.profile, dict) else {}
@@ -459,20 +460,14 @@ async def execute_coach_tool(
         cal_remaining = float(cal_data.get("remaining") or 600)
         pro_remaining = float(pro_data.get("remaining") or 30)
 
-        # Nutritional fit calculation
-        # 1. Calorie fit: ideal if within remaining budget
-        if cal_remaining > 0:
-            cal_diff = abs(cal_remaining - est_cal)
-            cal_score = max(20.0, 100.0 - (cal_diff / cal_remaining * 80.0))
-        else:
-            cal_score = 60.0
+        # Meal-slot budget normalization:
+        # Dinner target is ~35% of daily calories/protein, not 100% of the daily budget
+        target_slot_cal = 500.0 if cal_remaining <= 250 else min(750.0, max(450.0, cal_remaining if cal_remaining < 900 else cal_remaining * 0.35))
+        target_slot_pro = max(30.0, min(55.0, pro_remaining if pro_remaining < 60 else pro_remaining * 0.35))
 
-        # 2. Protein fit: ideal if it meets or approaches remaining protein
-        if pro_remaining > 0:
-            p_ratio = min(1.5, est_p / pro_remaining)
-            pro_score = min(100.0, p_ratio * 100.0)
-        else:
-            pro_score = 85.0
+        cal_diff = abs(target_slot_cal - est_cal)
+        cal_score = max(50.0, 100.0 - (cal_diff / max(1.0, target_slot_cal) * 50.0))
+        pro_score = min(100.0, (est_p / max(1.0, target_slot_pro)) * 100.0)
 
         nutrition_fit = min(100.0, (cal_score * 0.5) + (pro_score * 0.5))
 

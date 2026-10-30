@@ -1,0 +1,912 @@
+.demo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.demo-modal-window {
+  background: #ffffff;
+  border-radius: var(--border-radius-xl, 24px);
+  width: 100%;
+  max-width: 620px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.demo-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.demo-close-btn:hover {
+  background: #e2e8f0;
+  transform: rotate(90deg);
+}
+
+.demo-modal-header {
+  padding: 24px 28px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qloo-badge-tag {
+  background: linear-gradient(135deg, rgba(255, 94, 0, 0.1), rgba(124, 58, 237, 0.1));
+  border: 1px solid rgba(255, 94, 0, 0.3);
+  color: #ff5e00;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.demo-modal-header h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.demo-modal-header p {
+  font-size: 0.84rem;
+  color: #64748b;
+  max-width: 460px;
+}
+
+.demo-tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 9999px;
+}
+
+.demo-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.demo-tab-btn.active.highlight {
+  color: #ff5e00;
+}
+
+.tab-pill-star {
+  color: #ff5e00;
+  font-size: 0.85rem;
+}
+
+.demo-modal-body {
+  padding: 20px 28px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ──────────────── TAB 1: QLOO TASTE PLAYGROUND ──────────────── */
+.demo-taste-view {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.section-mini-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.persona-chip-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.persona-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.persona-chip:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.persona-chip.active {
+  border-color: #ff5e00;
+  background: #fff7ed;
+  box-shadow: 0 3px 12px rgba(255, 94, 0, 0.12);
+}
+
+.persona-avatar {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.persona-chip-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.persona-chip-info strong {
+  font-size: 0.82rem;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.persona-chip-info small {
+  font-size: 0.68rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* DNA Matrix Card */
+.dna-matrix-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.dna-matrix-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.dna-matrix-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dna-matrix-title h4 {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.dna-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #475569;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.dna-tags-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.dna-tag-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: #334155;
+  background: #ffffff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+}
+
+.dna-tag-item svg {
+  color: #ff5e00;
+  flex-shrink: 0;
+}
+
+.dna-tag-item span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Synthesizing Pipeline Box */
+.synth-pipeline-box {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.spin-icon {
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pipeline-steps .step {
+  font-size: 0.72rem;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.pipeline-steps .step.active {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.taste-synth-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+/* Taste Result Card */
+.taste-result-card {
+  background: #ffffff;
+  border: 1px solid rgba(255, 94, 0, 0.25);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(255, 94, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taste-card-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.qloo-verified-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #7c3aed;
+  background: #f5f3ff;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.taste-meal-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.taste-meal-thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.anchor-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ff5e00;
+  margin-bottom: 2px;
+}
+
+.taste-meal-header h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.ingredients-txt {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+/* Macro Grid */
+.macro-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.spec-card {
+  background: #f8fafc;
+  padding: 8px 6px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #f1f5f9;
+}
+
+.spec-lbl {
+  font-size: 0.65rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.spec-val {
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.spec-val.green {
+  color: #ff5e00;
+}
+.spec-val.blue {
+  color: #2563eb;
+}
+.spec-val.purple {
+  color: #7c3aed;
+}
+.spec-val.amber {
+  color: #d97706;
+}
+
+/* Bridge Rationale */
+.qloo-bridge-rationale {
+  background: linear-gradient(135deg, #fff7ed, #faf5ff);
+  border: 1px solid rgba(255, 94, 0, 0.2);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.74rem;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.qloo-bridge-rationale strong {
+  color: #9a3412;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ──────────────── TAB 2: AI SCAN ──────────────── */
+.demo-scan-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-preset-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.preset-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.preset-chip {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-chip:hover {
+  background: #e2e8f0;
+}
+
+.preset-chip.active {
+  background: #ff5e00;
+  color: #ffffff;
+  border-color: #ff5e00;
+  box-shadow: 0 2px 8px rgba(255, 94, 0, 0.25);
+}
+
+.scan-sample-image {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 190px;
+  margin-bottom: 14px;
+}
+
+.scan-sample-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-overlay-prompt {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.scan-action-btn {
+  width: 100%;
+  padding: 12px;
+}
+
+.scan-results-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.result-header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.result-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.result-header h4 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.result-header p {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.match-pill {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #059669;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-bottom: 2px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.res-stat-card {
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.res-lbl {
+  font-size: 0.65rem;
+  color: #64748b;
+}
+
+.res-val {
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.res-val.green {
+  color: #ff5e00;
+}
+.res-val.blue {
+  color: #2563eb;
+}
+.res-val.purple {
+  color: #7c3aed;
+}
+.res-val.amber {
+  color: #d97706;
+}
+
+.res-coach-tip {
+  background: #fff0e5;
+  border: 1px solid rgba(255, 94, 0, 0.3);
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.76rem;
+  color: #c44800;
+}
+
+.res-reset-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.76rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+/* ──────────────── TAB 3: AGENT COACH CHAT ──────────────── */
+.demo-chat-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 360px;
+}
+
+.chat-prompt-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.prompt-chip-btn {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px dashed rgba(255, 94, 0, 0.4);
+  background: #fff7ed;
+  color: #c44800;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.prompt-chip-btn:hover {
+  background: #ff5e00;
+  color: #ffffff;
+  border-style: solid;
+}
+
+.chat-thread {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 6px;
+}
+
+.chat-bubble-row {
+  display: flex;
+}
+
+.chat-bubble-row.user {
+  justify-content: flex-end;
+}
+
+.chat-bubble-row.ai {
+  justify-content: flex-start;
+}
+
+.bubble-content {
+  padding: 12px 14px;
+  border-radius: 18px;
+  font-size: 0.82rem;
+  max-width: 85%;
+  line-height: 1.45;
+}
+
+.chat-bubble-row.user .bubble-content {
+  background: #0f172a;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-bubble-row.ai .bubble-content {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-bottom-left-radius: 4px;
+}
+
+/* Chat Telemetry Badge */
+.chat-telemetry-badge {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.telemetry-score-tag {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #059669;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.telemetry-anchors {
+  font-size: 0.66rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.chat-recipe-card {
+  margin-top: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 94, 0, 0.3);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.chat-recipe-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.chat-recipe-macros {
+  display: flex;
+  gap: 6px;
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.chat-recipe-macros .blue {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+.chat-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ff5e00;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* ──────────────── MODAL FOOTER ──────────────── */
+.demo-modal-footer {
+  padding: 14px 28px 18px;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.footer-hackathon-callout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  display: inline-block;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.text-orange {
+  color: #ff5e00;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .demo-modal-overlay {
+    padding: 10px;
+  }
+
+  .demo-modal-window {
+    max-height: 96vh;
+    border-radius: 18px;
+  }
+
+  .demo-modal-header {
+    padding: 18px 16px 12px;
+  }
+
+  .demo-modal-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .demo-modal-body {
+    padding: 14px 16px;
+  }
+
+  .persona-chip-group {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .dna-tags-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-spec-grid,
+  .result-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .demo-modal-footer {
+    padding: 12px 16px 16px;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .demo-modal-footer button {
+    width: 100%;
+  }
+}

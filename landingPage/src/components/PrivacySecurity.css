@@ -1,0 +1,118 @@
+.privacy-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.privacy-container-box {
+  background: var(--bg-subtle);
+  border-radius: var(--border-radius-xl);
+  padding: 60px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--border-color);
+}
+
+.privacy-badge-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 36px;
+}
+
+.compliance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  padding: 12px 20px;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.shield-icon-wrap {
+  font-size: 1.5rem;
+}
+
+.compliance-badge div {
+  display: flex;
+  flex-direction: column;
+}
+
+.compliance-badge strong {
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.compliance-badge span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* 4 Cards Grid */
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.security-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius-md);
+  padding: 24px 20px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all var(--transition-normal);
+}
+
+.security-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.security-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.security-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.security-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .privacy-container-box {
+    padding: 48px 28px;
+  }
+  .privacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .privacy-grid {
+    grid-template-columns: 1fr;
+  }
+  .privacy-container-box {
+    padding: 36px 20px;
+  }
+}

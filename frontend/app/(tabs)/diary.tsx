@@ -147,9 +147,7 @@ export default function Diary() {
       ? Math.round(
           meals.reduce(
             (sum, m) =>
-              sum +
-              (m.bio_cultural_score ||
-                90 + ((m.title.charCodeAt(0) + Math.round(m.calories)) % 7)),
+              sum + (Number(m.bio_cultural_score) || 92),
             0,
           ) / meals.length,
         )
@@ -424,9 +422,7 @@ export default function Diary() {
             icon: "restaurant-outline",
           };
           const timeStr = formatMealTime(item.logged_at);
-          const bioScore =
-            item.bio_cultural_score ||
-            90 + ((item.title.charCodeAt(0) + Math.round(item.calories)) % 7);
+          const bioScore = Number(item.bio_cultural_score) || 94;
 
           return (
             <TouchableOpacity

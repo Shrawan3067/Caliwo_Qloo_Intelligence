@@ -57,6 +57,10 @@ class MealSchema(BaseSchema):
     image_content_type: Optional[str] = None
     image_size_bytes: Optional[int] = None
     image_uploaded_at: Optional[datetime] = None
+
+    # Qloo Cultural Intelligence Telemetry
+    bio_cultural_score: Optional[int] = None
+    cultural_meta: Optional[dict] = None
     
     logged_at: datetime
 

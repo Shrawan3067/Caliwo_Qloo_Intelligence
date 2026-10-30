@@ -1,0 +1,147 @@
+.intelligence-section {
+  background-color: #0b0f19;
+}
+
+.dark-intelligence-banner {
+  background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #0d1527 100%);
+  border-radius: var(--border-radius-xl);
+  padding: 80px 48px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -15px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dark-intelligence-banner::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 94, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.intelligence-header {
+  max-width: 650px;
+  margin: 0 auto 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.intelligence-header .badge-tag {
+  align-self: center;
+}
+
+.intelligence-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+  text-align: center;
+  width: 100%;
+}
+
+.intelligence-subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.intelligence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.intelligence-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-md);
+  padding: 28px 24px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.intelligence-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 133, 51, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.intelligence-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.intelligence-card-title {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.intelligence-card-desc {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .intelligence-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .dark-intelligence-banner {
+    padding: 48px 24px;
+  }
+
+  .intelligence-title {
+    font-size: 2.2rem;
+  }
+
+  .intelligence-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dark-intelligence-banner {
+    padding: 36px 16px;
+    border-radius: var(--border-radius-lg);
+  }
+
+  .intelligence-title {
+    font-size: 1.85rem;
+  }
+
+  .intelligence-subtitle {
+    font-size: 0.95rem;
+  }
+}

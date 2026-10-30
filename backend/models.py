@@ -104,6 +104,10 @@ class Meal(Base):
     image_size_bytes: Any = Column(Integer, nullable=True)
     image_uploaded_at: Any = Column(DateTime, nullable=True)
     image_metadata: Any = Column(JSONB, nullable=True)
+
+    # Qloo Cultural Intelligence Telemetry
+    cultural_meta: Any = Column(JSONB, nullable=True, default=dict)
+    bio_cultural_score: Any = Column(Integer, nullable=True)
     
     logged_at: Any = Column(DateTime, default=utc_now, index=True)
 

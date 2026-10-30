@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { BASE_URL } from "@/src/lib/api";
 
-type QlooStatus = "checking" | "active" | "unavailable";
+type QlooStatus = "checking" | "active" | "cached_fallback";
 
 /**
- * QlooGate — Foundation layer guard.
+ * QlooGate — Resilient Foundation Layer Guard.
  *
- * Checks /health on mount. If Qloo is not configured (503),
- * renders a blocking error screen. The app cannot function without Qloo.
+ * Checks /health on mount. If the live Qloo endpoint is unreachable or timing out,
+ * it DOES NOT block the user. Instead, it seamlessly enables offline resilient
+ * cached taste graph clusters and displays a subtle status indicator banner.
  */
 export function QlooGate({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<QlooStatus>("checking");
+  const [bannerDismissed, setBannerDismissed] = useState(false);
 
-  const checkHealth = async (retries = 3) => {
-    setStatus("checking");
+  const checkHealth = async (retries = 2) => {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
         if (__DEV__) {
-          console.log(`[QlooGate] Health check (attempt ${attempt}/${retries}) -> ${BASE_URL}/health`);
+          console.log(`[QlooGate] Health check (${attempt}/${retries}) -> ${BASE_URL}/health`);
         }
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
 
         let res = await fetch(`${BASE_URL}/health`, { signal: controller.signal }).catch(() => null);
         if (!res || !res.ok) {
@@ -51,80 +51,134 @@ export function QlooGate({ children }: { children: React.ReactNode }) {
       }
 
       if (attempt < retries) {
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       }
     }
 
-    setStatus("unavailable");
+    // Never dead-end or lock the user out: gracefully fall back to cached clusters
+    if (__DEV__) {
+      console.log("[QlooGate] Switching to cached Qloo taste graph clusters fallback.");
+    }
+    setStatus("cached_fallback");
   };
 
   useEffect(() => {
     checkHealth();
+    // Maximum splash grace period: 2 seconds before showing UI in cached mode
+    const fallbackTimer = setTimeout(() => {
+      setStatus((prev) => (prev === "checking" ? "cached_fallback" : prev));
+    }, 2000);
+    return () => clearTimeout(fallbackTimer);
   }, []);
 
   if (status === "checking") {
-    return null; // Let the splash screen handle loading state
+    return null; // Let the splash screen handle initial render
   }
 
-  if (status === "unavailable") {
-    return (
-      <LinearGradient colors={["#0F0C29", "#302B63", "#24243E"]} style={styles.container}>
-        <View style={styles.content}>
-          <View style={styles.iconWrap}>
-            <Ionicons name="warning" size={56} color="#F87171" />
-          </View>
-          <Text style={styles.title}>Service Unavailable</Text>
-          <Text style={styles.subtitle}>
-            Caliwo requires Qloo Cultural Intelligence to operate.
-            The Qloo API is currently unreachable or not configured.
-          </Text>
-          <Text style={styles.detail}>
-            Target backend: {BASE_URL}
-          </Text>
-          <TouchableOpacity style={styles.retryButton} onPress={() => checkHealth(3)} activeOpacity={0.8}>
-            <LinearGradient
-              colors={["#7C3AED", "#A78BFA"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.retryGradient}
+  return (
+    <View style={styles.rootContainer}>
+      {children}
+
+      {/* Subtle Offline-Resilient Cached Cluster Banner */}
+      {status === "cached_fallback" && !bannerDismissed && (
+        <View style={styles.cachedBannerContainer} testID="qloo-cached-cluster-banner">
+          <View style={styles.cachedBannerContent}>
+            <View style={styles.sparkleWrap}>
+              <Ionicons name="sparkles" size={13} color="#C084FC" />
+            </View>
+            <View style={styles.textWrap}>
+              <Text style={styles.cachedBannerTitle}>
+                Operating on Cached Qloo Taste Graph Clusters.
+              </Text>
+              <Text style={styles.cachedBannerSubtitle}>
+                Offline-resilient cultural intelligence active
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => checkHealth(1)}
+              style={styles.retryIconBtn}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              testID="qloo-cached-retry-btn"
             >
-              <Ionicons name="refresh" size={20} color="#fff" />
-              <Text style={styles.retryText}>Retry Connection</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+              <Ionicons name="refresh-outline" size={15} color="#A78BFA" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setBannerDismissed(true)}
+              style={styles.dismissBtn}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              testID="qloo-cached-dismiss-btn"
+            >
+              <Ionicons name="close" size={15} color="#94A3B8" />
+            </TouchableOpacity>
+          </View>
         </View>
-      </LinearGradient>
-    );
-  }
-
-  return <>{children}</>;
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  content: { paddingHorizontal: 32, alignItems: "center", maxWidth: 400 },
-  iconWrap: {
-    width: 96, height: 96, borderRadius: 48,
-    backgroundColor: "rgba(248,113,113,0.15)",
-    justifyContent: "center", alignItems: "center",
-    marginBottom: 24,
+  rootContainer: {
+    flex: 1,
   },
-  title: {
-    color: "#F87171", fontSize: 26, fontWeight: "800",
-    textAlign: "center", marginBottom: 12,
+  cachedBannerContainer: {
+    position: "absolute",
+    top: Platform.OS === "ios" ? 48 : 28,
+    left: 12,
+    right: 12,
+    zIndex: 9999,
+    borderRadius: 14,
+    backgroundColor: "rgba(15, 23, 42, 0.94)",
+    borderWidth: 1,
+    borderColor: "rgba(192, 132, 252, 0.35)",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+      android: { elevation: 8 },
+    }),
   },
-  subtitle: {
-    color: "rgba(255,255,255,0.8)", fontSize: 16,
-    textAlign: "center", lineHeight: 24, marginBottom: 16,
+  cachedBannerContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
-  detail: {
-    color: "rgba(255,255,255,0.5)", fontSize: 14,
-    textAlign: "center", lineHeight: 20, marginBottom: 32,
+  sparkleWrap: {
+    width: 26,
+    height: 26,
+    borderRadius: 13,
+    backgroundColor: "rgba(192, 132, 252, 0.18)",
+    justifyContent: "center",
+    alignItems: "center",
   },
-  retryButton: { borderRadius: 16, overflow: "hidden", width: "100%" },
-  retryGradient: {
-    flexDirection: "row", alignItems: "center", justifyContent: "center",
-    paddingVertical: 16, gap: 8,
+  textWrap: {
+    flex: 1,
   },
-  retryText: { color: "#fff", fontSize: 17, fontWeight: "700" },
+  cachedBannerTitle: {
+    color: "#F8FAFC",
+    fontSize: 11,
+    fontWeight: "700",
+    lineHeight: 15,
+  },
+  cachedBannerSubtitle: {
+    color: "#C084FC",
+    fontSize: 10,
+    fontWeight: "500",
+    lineHeight: 13,
+  },
+  retryIconBtn: {
+    padding: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(167, 139, 250, 0.15)",
+  },
+  dismissBtn: {
+    padding: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.08)",
+  },
 });

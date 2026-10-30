@@ -1,0 +1,310 @@
+.hackathon-judge-section {
+  position: relative;
+  padding: 40px 0 60px;
+  background-color: var(--bg-page);
+  z-index: 10;
+}
+
+.judge-banner-card {
+  position: relative;
+  background: linear-gradient(135deg, #090e1a 0%, #111a2e 50%, #0d1527 100%);
+  border: 1px solid rgba(255, 94, 0, 0.28);
+  border-radius: var(--border-radius-xl);
+  box-shadow: 
+    0 24px 60px -12px rgba(11, 15, 25, 0.4),
+    0 0 35px rgba(255, 94, 0, 0.12);
+  overflow: hidden;
+  padding: 48px;
+}
+
+/* Ambient glow blobs */
+.judge-mesh-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.glow-primary {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 94, 0, 0.35) 0%, transparent 70%);
+  top: -80px;
+  right: -60px;
+}
+
+.glow-cyan {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+  bottom: -90px;
+  left: 20%;
+}
+
+.judge-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.judge-content {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Judge Tag Badge */
+.judge-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 94, 0, 0.12);
+  border: 1px solid rgba(255, 94, 0, 0.35);
+  padding: 6px 14px;
+  border-radius: var(--border-radius-full);
+  margin-bottom: 20px;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulseBeacon 2s infinite ease-out;
+}
+
+@keyframes pulseBeacon {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.judge-badge-text {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ff944d;
+  text-transform: uppercase;
+}
+
+/* Title & Description */
+.judge-title {
+  font-size: clamp(1.85rem, 2.8vw, 2.45rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.judge-title-highlight {
+  background: linear-gradient(135deg, #ff5e00 0%, #ff9e58 45%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.judge-description {
+  font-size: 1.05rem;
+  line-height: 1.68;
+  color: #94a3b8;
+  margin-bottom: 24px;
+  max-width: 620px;
+}
+
+/* Meta Chips */
+.judge-meta-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: var(--border-radius-full);
+}
+
+.chip-icon.icon-emerald {
+  color: #10b981;
+}
+
+.chip-icon.icon-amber {
+  color: #f59e0b;
+}
+
+.chip-icon.icon-cyan {
+  color: #38bdf8;
+}
+
+/* Right Action Panel */
+.judge-action-panel {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.judge-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 28px;
+  background: linear-gradient(135deg, #ff5e00 0%, #ff7722 100%);
+  border-radius: var(--border-radius-lg);
+  color: #ffffff;
+  text-decoration: none;
+  box-shadow: 
+    0 10px 25px -4px rgba(255, 94, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.judge-download-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 16px 36px -4px rgba(255, 94, 0, 0.6),
+    0 0 25px rgba(255, 94, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.btn-icon-circle {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.judge-download-btn:hover .btn-icon-circle {
+  transform: translateY(2px);
+}
+
+.btn-text-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.btn-subtext {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+}
+
+.btn-maintext {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.btn-arrow {
+  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.2s ease;
+}
+
+.judge-download-btn:hover .btn-arrow {
+  transform: translateX(4px);
+  color: #ffffff;
+}
+
+/* APK Specs Under Button */
+.apk-specs-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.spec-name {
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.spec-dot {
+  color: #475569;
+}
+
+.spec-status {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+  .judge-banner-card {
+    padding: 36px 28px;
+  }
+
+  .judge-card-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .judge-action-panel {
+    align-items: stretch;
+  }
+
+  .judge-download-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hackathon-judge-section {
+    padding: 24px 0 40px;
+  }
+
+  .judge-banner-card {
+    padding: 28px 20px;
+    border-radius: var(--border-radius-lg);
+  }
+
+  .judge-title {
+    font-size: 1.6rem;
+  }
+
+  .judge-description {
+    font-size: 0.95rem;
+  }
+
+  .btn-maintext {
+    font-size: 1rem;
+  }
+}
