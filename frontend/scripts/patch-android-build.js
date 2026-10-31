@@ -74,3 +74,4 @@ if (fs.existsSync(hermesBinary)) {
     }
   }
 }
+
