@@ -82,9 +82,10 @@ export default function SignIn() {
       await signInEmail(email.trim().toLowerCase(), password);
     } catch (e: any) {
       if (isMounted.current) {
+        const networkErr = !e?.response && (e?.message?.includes("Network") || e?.code === "ECONNABORTED" || e?.message?.includes("timeout"));
         setError(
           e?.response?.data?.detail ||
-            "Sign-in failed. Please check your credentials.",
+            (networkErr ? "Cannot connect to server. Please check your network connection." : "Sign-in failed. Please check your credentials."),
         );
       }
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(

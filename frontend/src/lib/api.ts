@@ -26,23 +26,25 @@ function getDevHostIp(): string | null {
   return null;
 }
 
+function isLocalOrPrivateUrl(url: string): boolean {
+  return (
+    url.includes("localhost") ||
+    url.includes("127.0.0.1") ||
+    url.includes("10.0.2.2") ||
+    /https?:\/\/(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)(:\d+)?/.test(url)
+  );
+}
+
 function getFallbackBaseUrl(): string {
   const envUrl = process.env.EXPO_PUBLIC_BACKEND_URL || process.env.EXPO_PUBLIC_API_URL;
   const devHostIp = getDevHostIp();
 
-  // When running in Expo Go or on physical mobile device, localhost/127.0.0.1
-  // points to the phone itself, not the Mac/dev machine. Replace with Metro host LAN IP.
+  // When running in Expo Go or on physical mobile device, localhost or private subnet IPs
+  // point to the phone itself or a previous stale Wi-Fi router. Replace with Metro host LAN IP.
   if (devHostIp) {
     if (envUrl) {
-      if (
-        envUrl.includes("localhost") ||
-        envUrl.includes("127.0.0.1") ||
-        envUrl.includes("10.0.2.2")
-      ) {
-        return envUrl
-          .replace("localhost", devHostIp)
-          .replace("127.0.0.1", devHostIp)
-          .replace("10.0.2.2", devHostIp);
+      if (isLocalOrPrivateUrl(envUrl)) {
+        return envUrl.replace(/https?:\/\/[^:/]+/, `http://${devHostIp}`);
       }
       return envUrl;
     }
