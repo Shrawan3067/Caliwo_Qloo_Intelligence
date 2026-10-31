@@ -40,12 +40,12 @@ function withProguardAndAbiFilter(config) {
       );
     }
 
-    // ── 3. ABI filter — ship only arm64-v8a ──
-    // This alone saves ~30-50MB by not bundling x86, x86_64, armeabi-v7a
+    // ── 3. ABI filter — ship arm64-v8a + armeabi-v7a ──
+    // Saves ~30-50MB by not bundling x86, x86_64 but keeps 32-bit ARM support
     if (!contents.includes("abiFilters")) {
       contents = contents.replace(
         /(defaultConfig\s*\{)/,
-        '$1\n        ndk {\n            abiFilters "arm64-v8a"\n        }'
+        '$1\n        ndk {\n            abiFilters "armeabi-v7a", "arm64-v8a"\n        }'
       );
     }
 
@@ -84,10 +84,10 @@ function withOptimizedGradleProps(config) {
 
     // ── Size optimizations ──────────────────────────────────────────────
 
-    // Ship only arm64-v8a native libraries for APK builds.
-    // This alone saves ~65MB by not bundling x86, x86_64, armeabi-v7a.
-    // For AAB/Play Store, Google handles per-device ABI delivery.
-    setGradleProp(props, "reactNativeArchitectures", "arm64-v8a");
+    // Ship arm64-v8a + armeabi-v7a native libraries for APK builds.
+    // arm64-v8a covers ~95%+ of modern devices; armeabi-v7a ensures
+    // older/budget 32-bit devices don't crash on launch.
+    setGradleProp(props, "reactNativeArchitectures", "armeabi-v7a,arm64-v8a");
 
     // Enable R8 code shrinking / minification for release builds.
     // This dramatically reduces DEX size by removing dead Java/Kotlin code.

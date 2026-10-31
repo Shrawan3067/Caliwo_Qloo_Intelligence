@@ -3,7 +3,8 @@ const fs = require("fs");
 const path = require("path");
 
 /**
- * Expo Config Plugin to enable iOS App Group entitlements and Android AppWidget receivers for Caliwo Widgets.
+ * Expo Config Plugin to enable iOS App Group entitlements, Android AppWidget receivers,
+ * and network security configuration for Caliwo.
  */
 function withWidgetsPlugin(config) {
   // 1. Add iOS App Group Entitlement
@@ -70,14 +71,30 @@ function withWidgetsPlugin(config) {
         fs.writeFileSync(path.join(xmlDir, "secure_store_data_extraction_rules.xml"), dataExtractionRules, "utf8");
       }
 
+      // Network Security Config — allows cleartext HTTP to backend IP
+      const networkSecurityConfig = `<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">54.196.186.142</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">api.caliwo.app</domain>
+    </domain-config>
+</network-security-config>`;
+      fs.writeFileSync(path.join(xmlDir, "network_security_config.xml"), networkSecurityConfig, "utf8");
+
       return config;
     },
   ]);
 
-  // 3. Add Android Manifest Widget Receivers
+  // 3. Add Android Manifest Widget Receivers + Network Security
   config = withAndroidManifest(config, (config) => {
     const mainApplication = config.modResults.manifest.application?.[0];
     if (mainApplication) {
+      // Enable cleartext traffic + network security config
+      mainApplication.$["android:usesCleartextTraffic"] = "true";
+      mainApplication.$["android:networkSecurityConfig"] = "@xml/network_security_config";
+
       if (!mainApplication.receiver) {
         mainApplication.receiver = [];
       }
