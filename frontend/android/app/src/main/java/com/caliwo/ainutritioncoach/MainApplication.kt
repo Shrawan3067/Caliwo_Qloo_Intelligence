@@ -35,7 +35,11 @@ class MainApplication : Application(), ReactApplication {
       ReleaseLevel.STABLE
     }
     loadReactNative(this)
-    ApplicationLifecycleDispatcher.onApplicationCreate(this)
+    try {
+      ApplicationLifecycleDispatcher.onApplicationCreate(this)
+    } catch (e: Throwable) {
+      android.util.Log.e("MainApplication", "Error in ApplicationLifecycleDispatcher", e)
+    }
   }
 
   override fun onConfigurationChanged(newConfig: Configuration) {

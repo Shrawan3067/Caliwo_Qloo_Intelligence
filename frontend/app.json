@@ -7,12 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "caliwo",
     "userInterfaceStyle": "light",
-    "updates": {
-      "url": "https://u.expo.dev/caliwo"
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.caliwo.ainutritioncoach",

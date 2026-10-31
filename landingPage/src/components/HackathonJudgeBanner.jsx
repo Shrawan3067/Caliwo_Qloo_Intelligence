@@ -65,7 +65,7 @@ export default function HackathonJudgeBanner() {
               <div className="apk-specs-row">
                 <span className="spec-name">caliwo-release.apk</span>
                 <span className="spec-dot">•</span>
-                <span className="spec-size">46 MB</span>
+                <span className="spec-size">75 MB</span>
                 <span className="spec-dot">•</span>
                 <span className="spec-status">Ready to Test (Release v1.0.0)</span>
               </div>
