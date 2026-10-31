@@ -406,61 +406,19 @@ export default function ProfileScreen() {
 
         {/* Subscription Section */}
         <Section title="Subscription" noCard>
-          {sub?.is_pro ? (
-            <View style={styles.proStatus}>
-              <View style={styles.proStatusIcon}>
-                <Ionicons name="star" size={20} color={colors.accent} />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.proStatusTitle}>
-                  {sub.pro_source === "family"
-                    ? "Pro via family"
-                    : "Caliwo Pro Active"}
-                </Text>
-                {proUntilLabel ? (
-                  <Text style={styles.proStatusSub}>
-                    {sub.pro_source === "family"
-                      ? "Shared by your family owner"
-                      : `Renews ${proUntilLabel}`}
-                  </Text>
-                ) : null}
-              </View>
-              {sub.pro_source !== "family" ? (
-                <TouchableOpacity
-                  style={styles.smallBtn}
-                  onPress={() => router.push("/paywall")}
-                  activeOpacity={0.8}
-                  testID="profile-extend-pro"
-                >
-                  <Text style={styles.smallBtnText}>Extend 30d</Text>
-                </TouchableOpacity>
-              ) : null}
+          <View style={styles.proStatus}>
+            <View style={styles.proStatusIcon}>
+              <Ionicons name="star" size={20} color={colors.accent} />
             </View>
-          ) : (
-            <TouchableOpacity
-              style={styles.upgradeCard}
-              onPress={() => router.push("/paywall")}
-              activeOpacity={0.9}
-              testID="profile-upgrade-btn"
-            >
-              <View style={styles.upgradeIcon}>
-                <Ionicons
-                  name="rocket-outline"
-                  size={20}
-                  color={colors.white}
-                />
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={styles.upgradeTitle}>
-                  Upgrade to Pro — ${sub?.price_usd ?? 9.99}
-                </Text>
-                <Text style={styles.upgradeSub}>
-                  Unlimited AI meal plans, recipes, scans & family sharing
-                </Text>
-              </View>
-              <Ionicons name="chevron-forward" size={18} color={colors.white} />
-            </TouchableOpacity>
-          )}
+            <View style={{ flex: 1 }}>
+              <Text style={styles.proStatusTitle}>
+                Caliwo Pro Active
+              </Text>
+              <Text style={styles.proStatusSub}>
+                Full Access Unlocked (Qloo Hackathon Edition)
+              </Text>
+            </View>
+          </View>
         </Section>
 
         {/* Social Groups Section */}

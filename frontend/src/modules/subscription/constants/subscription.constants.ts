@@ -16,14 +16,6 @@ export const SUBSCRIPTION_PRODUCTS = {
 
 export const ENTITLEMENT_ID = "premium";
 
-export const REVENUECAT_CONFIG = {
-  /** Public API keys — safe to include in client bundle */
-  PUBLIC_ANDROID_KEY:
-    process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY || "goog_placeholder_android_api_key",
-  PUBLIC_IOS_KEY:
-    process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY || "appl_placeholder_ios_api_key",
-};
-
 export const FEATURE_KEYS = {
   UNLIMITED_AI: "unlimited_ai",
   UNLIMITED_MEAL_SCAN: "unlimited_meal_scan",

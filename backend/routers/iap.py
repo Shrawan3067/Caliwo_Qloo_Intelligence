@@ -1,7 +1,6 @@
 """
 IAP (In-App Purchase) Router
 Server-side purchase verification for Google Play Billing & Apple App Store.
-Used as a secondary verification layer alongside RevenueCat webhooks.
 """
 
 import os
@@ -259,16 +258,11 @@ async def iap_verify(
             raise HTTPException(status_code=400, detail="Purchase verification failed")
 
     elif inp.platform == "ios":
-        # iOS App Store Server API verification.
-        # Primary verification is handled by RevenueCat webhooks (subscriptions.py).
-        # This endpoint serves as a secondary client-side confirmation.
-        # For full receipt validation, configure IOS_APPSTORE_PRIVATE_KEY and
-        # implement App Store Server API v2 validation.
         ios_key = os.environ.get("IOS_APPSTORE_PRIVATE_KEY", "").strip()
         if not ios_key or ios_key.upper() in ("PLACEHOLDER", "NONE", "FALSE"):
-            logger.info(f"iOS transaction {inp.transaction_id} — relying on RevenueCat webhooks for full verification")
+            logger.info(f"iOS transaction {inp.transaction_id} — simulated verification")
         else:
-            logger.info(f"iOS transaction {inp.transaction_id} — App Store key present, RevenueCat handles verification")
+            logger.info(f"iOS transaction {inp.transaction_id} — App Store key present")
 
     # 5. Update subscription record in database
     plan = _plan_from_product_id(inp.product_id)

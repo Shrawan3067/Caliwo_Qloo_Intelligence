@@ -110,10 +110,6 @@ export default function PlanScreen() {
   );
 
   const generatePlan = async () => {
-    if (!user?.is_pro) {
-      router.push("/paywall");
-      return;
-    }
     setGenerating(true);
     try {
       const r = await api.post("/meal-plans/generate", {
@@ -138,10 +134,6 @@ export default function PlanScreen() {
         "Describe the recipe you want",
         "e.g. 'quick high-protein dinner with chicken'",
       );
-      return;
-    }
-    if (!user?.is_pro) {
-      router.push("/paywall");
       return;
     }
     setGenRecipe(true);
