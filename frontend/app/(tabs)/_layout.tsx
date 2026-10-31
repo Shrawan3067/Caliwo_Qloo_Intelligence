@@ -20,6 +20,9 @@ import { useAuth } from "@/src/context/AuthContext";
 
 function CustomTabBar({ state, descriptors, navigation }: any) {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
+
   if (!state?.routes || !descriptors) {
     return null;
   }
@@ -30,9 +33,6 @@ function CustomTabBar({ state, descriptors, navigation }: any) {
   if (currentRoute?.name === "coach" || options?.tabBarStyle?.display === "none") {
     return null;
   }
-
-  const insets = useSafeAreaInsets();
-  const { width } = useWindowDimensions();
 
   const barHeight = 66;
   const bottomPadding = Math.max(insets.bottom, 10);
