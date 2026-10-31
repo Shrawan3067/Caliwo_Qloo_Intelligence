@@ -44,7 +44,7 @@ export default function BottomCTA({ onDownloadClick }) {
                   <Download size={22} className="cta-icon-download" />
                 </div>
                 <div className="cta-btn-text-col">
-                  <span className="cta-btn-micro">DIRECT BUILD · 41 MB</span>
+                  <span className="cta-btn-micro">DIRECT BUILD · 46 MB</span>
                   <span className="cta-btn-headline">Download .APK</span>
                 </div>
                 <ArrowRight size={18} className="cta-btn-arrow" />

@@ -47,7 +47,13 @@ export default function Hero({ onDownloadClick, onTryDemo }) {
               </div>
             </button>
 
-            <button className="store-btn" onClick={onDownloadClick}>
+            <a 
+              href="/caliwo-release.apk" 
+              download="caliwo-release.apk" 
+              className="store-btn"
+              style={{ textDecoration: "none", color: "inherit" }}
+              aria-label="Download Android Production APK"
+            >
               <svg width="32" height="32" viewBox="0 0 512 512">
                 <path
                   fill="#4285F4"
@@ -67,10 +73,10 @@ export default function Hero({ onDownloadClick, onTryDemo }) {
                 />
               </svg>
               <div className="store-btn-text">
-                <span className="store-btn-subtitle">GET IT ON</span>
-                <span className="store-btn-title">Google Play</span>
+                <span className="store-btn-subtitle">ANDROID RELEASE (46MB)</span>
+                <span className="store-btn-title">Download .APK</span>
               </div>
-            </button>
+            </a>
           </div>
 
           {/* User Ratings & Social Proof */}
