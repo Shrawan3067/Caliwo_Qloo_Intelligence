@@ -19,6 +19,11 @@ import api from "@/src/lib/api";
 import { useAuth } from "@/src/context/AuthContext";
 
 function CustomTabBar({ state, descriptors, navigation }: any) {
+  const router = useRouter();
+  if (!state?.routes || !descriptors) {
+    return null;
+  }
+
   const currentRoute = state.routes[state.index];
   const { options } = descriptors[currentRoute?.key] || {};
 
@@ -88,13 +93,20 @@ Z
 
     const onPress = () => {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-      const event = navigation.emit({
-        type: "tabPress",
-        target: route.key,
-        canPreventDefault: true,
-      });
-      if (!isFocused && !event.defaultPrevented) {
-        navigation.navigate(route.name);
+      const event = navigation?.emit
+        ? navigation.emit({
+            type: "tabPress",
+            target: route.key,
+            canPreventDefault: true,
+          })
+        : { defaultPrevented: false };
+
+      if (!isFocused && !event?.defaultPrevented) {
+        if (navigation?.navigate) {
+          navigation.navigate(route.name);
+        } else {
+          router.push(`/(tabs)/${route.name}` as any);
+        }
       }
     };
 
@@ -130,13 +142,20 @@ Z
   const onScanPress = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     if (scanRoute) {
-      const event = navigation.emit({
-        type: "tabPress",
-        target: scanRoute.key,
-        canPreventDefault: true,
-      });
-      if (!isScanFocused && !event.defaultPrevented) {
-        navigation.navigate(scanRoute.name);
+      const event = navigation?.emit
+        ? navigation.emit({
+            type: "tabPress",
+            target: scanRoute.key,
+            canPreventDefault: true,
+          })
+        : { defaultPrevented: false };
+
+      if (!isScanFocused && !event?.defaultPrevented) {
+        if (navigation?.navigate) {
+          navigation.navigate(scanRoute.name);
+        } else {
+          router.push(`/(tabs)/${scanRoute.name}` as any);
+        }
       }
     }
   };
