@@ -75,3 +75,20 @@ if (fs.existsSync(hermesBinary)) {
   }
 }
 
+// 4. Ensure ExpoModulesPackageList.kt is present in app source
+const appModulesDir = path.join(frontendRoot, 'android/app/src/main/java/expo/modules');
+const appPackageList = path.join(appModulesDir, 'ExpoModulesPackageList.kt');
+const generatedPackageList = path.join(
+  frontendRoot,
+  'node_modules/expo/android/build/generated/kotlin/generatePackagesList/expo/modules/ExpoModulesPackageList.kt'
+);
+
+if (fs.existsSync(generatedPackageList) && !fs.existsSync(appPackageList)) {
+  if (!fs.existsSync(appModulesDir)) {
+    fs.mkdirSync(appModulesDir, { recursive: true });
+  }
+  fs.copyFileSync(generatedPackageList, appPackageList);
+  console.log('Successfully copied ExpoModulesPackageList.kt to android app source.');
+}
+
+

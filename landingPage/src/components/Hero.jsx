@@ -73,7 +73,7 @@ export default function Hero({ onDownloadClick, onTryDemo }) {
                 />
               </svg>
               <div className="store-btn-text">
-                <span className="store-btn-subtitle">ANDROID RELEASE (75MB)</span>
+                <span className="store-btn-subtitle">ANDROID RELEASE (56MB)</span>
                 <span className="store-btn-title">Download .APK</span>
               </div>
             </a>

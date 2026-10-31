@@ -40,12 +40,12 @@ function withProguardAndAbiFilter(config) {
       );
     }
 
-    // ── 3. ABI filter — ship arm64-v8a + armeabi-v7a ──
-    // Saves ~30-50MB by not bundling x86, x86_64 but keeps 32-bit ARM support
+    // ── 3. ABI filter — ship arm64-v8a + armeabi-v7a + x86_64 ──
+    // Supports physical ARM devices (32-bit & 64-bit) as well as x86_64 emulators/devices
     if (!contents.includes("abiFilters")) {
       contents = contents.replace(
         /(defaultConfig\s*\{)/,
-        '$1\n        ndk {\n            abiFilters "armeabi-v7a", "arm64-v8a"\n        }'
+        '$1\n        ndk {\n            abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"\n        }'
       );
     }
 
@@ -84,10 +84,13 @@ function withOptimizedGradleProps(config) {
 
     // ── Size optimizations ──────────────────────────────────────────────
 
-    // Ship arm64-v8a + armeabi-v7a native libraries for APK builds.
-    // arm64-v8a covers ~95%+ of modern devices; armeabi-v7a ensures
-    // older/budget 32-bit devices don't crash on launch.
-    setGradleProp(props, "reactNativeArchitectures", "armeabi-v7a,arm64-v8a");
+    // Ship arm64-v8a + armeabi-v7a + x86_64 native libraries for APK builds.
+    // arm64-v8a covers modern phones; armeabi-v7a covers 32-bit devices; x86_64 covers emulators.
+    setGradleProp(props, "reactNativeArchitectures", "armeabi-v7a,arm64-v8a,x86_64");
+
+    // Enable legacy packaging (extract native libraries to disk upon install)
+    // This prevents dlopen / SoLoader crashes on Android 14/15 and side-loaded APKs
+    setGradleProp(props, "expo.useLegacyPackaging", "true");
 
     // Enable R8 code shrinking / minification for release builds.
     // This dramatically reduces DEX size by removing dead Java/Kotlin code.

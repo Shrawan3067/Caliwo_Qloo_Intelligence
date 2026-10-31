@@ -91,9 +91,10 @@ function withWidgetsPlugin(config) {
   config = withAndroidManifest(config, (config) => {
     const mainApplication = config.modResults.manifest.application?.[0];
     if (mainApplication) {
-      // Enable cleartext traffic + network security config
+      // Enable cleartext traffic + network security config + native lib extraction
       mainApplication.$["android:usesCleartextTraffic"] = "true";
       mainApplication.$["android:networkSecurityConfig"] = "@xml/network_security_config";
+      mainApplication.$["android:extractNativeLibs"] = "true";
 
       if (!mainApplication.receiver) {
         mainApplication.receiver = [];

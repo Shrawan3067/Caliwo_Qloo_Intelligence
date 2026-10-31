@@ -47,6 +47,8 @@
 
 # ── Expo Modules ──────────────────────────────────────────────────────
 -keep class expo.modules.** { *; }
+-keep class expo.modules.ExpoModulesPackageList { *; }
+-keep interface expo.modules.kotlin.ModulesProvider { *; }
 -keepclassmembers class * {
   @expo.modules.core.interfaces.ExpoProp *;
 }
