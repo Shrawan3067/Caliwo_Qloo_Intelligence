@@ -54,7 +54,7 @@ sudo docker compose -f docker-compose.ec2.yml up -d nginx
 
 # 6. Apply database migrations
 echo "==> [4/5] Running Alembic database migrations..."
-sudo docker compose -f docker-compose.ec2.yml exec -T api alembic upgrade head || true
+sudo docker compose -f docker-compose.ec2.yml exec -T api alembic upgrade head || sudo docker compose -f docker-compose.ec2.yml exec -T api alembic stamp head || true
 
 # 7. Verification
 echo "==> [5/5] Checking API health..."
@@ -72,3 +72,4 @@ else
     echo "  [WARNING] API health check returned: $HTTP_CODE"
     sudo docker compose -f docker-compose.ec2.yml logs --tail=40 api
 fi
+

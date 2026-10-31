@@ -7,4 +7,7 @@ __pycache__/
 *.pyc
 *.db
 *.patch
-media/
+media/users/
+media/*.jpg
+media/*.png
+media/*.webp
