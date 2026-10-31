@@ -100,6 +100,8 @@ test_*.db
 
 # Build artifacts
 *.apk
+!landingPage/public/caliwo-release.apk
+!caliwo-release.apk
 *.aab
 *.ipa
 

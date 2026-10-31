@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "./scripts/cmd-guard.js --preinstall",
-    "postinstall": "node ./scripts/patch-expo-notifications.js",
+    "postinstall": "node ./scripts/patch-expo-notifications.js && node ./scripts/patch-android-build.js",
     "start": "expo start --port ${PORT:-3000}",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
