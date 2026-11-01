@@ -131,9 +131,9 @@ export function AppSplashScreen({ onFinish }: AppSplashScreenProps) {
         >
           <View style={styles.logoCard}>
             <Image
-              source={require("@/assets/images/app-icon.png")}
+              source={require("@/assets/images/icon.png")}
               style={styles.logoImg}
-              resizeMode="cover"
+              resizeMode="contain"
             />
           </View>
         </Animated.View>
