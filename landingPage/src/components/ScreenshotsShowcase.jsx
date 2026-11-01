@@ -976,17 +976,20 @@ export default function ScreenshotsShowcase({ onDownloadClick }) {
               <span className="badge-tag">{selectedScreen.badge}</span>
               <h3>{selectedScreen.title}</h3>
               <p>{selectedScreen.subtitle}</p>
-              <button
-                type="button"
-                className="btn btn-accent modal-cta-btn"
-                onClick={() => {
-                  setSelectedScreen(null);
-                  if (onDownloadClick) onDownloadClick();
-                }}
-              >
-                <Sparkles size={16} />
-                <span>Get Caliwo App Free</span>
-              </button>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                <a
+                  href="/caliwo-release.apk"
+                  download="caliwo-release.apk"
+                  className="btn btn-primary modal-cta-btn"
+                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                >
+                  <Sparkles size={16} />
+                  <span>Download Android .APK (56 MB)</span>
+                </a>
+                <span style={{ fontSize: '0.74rem', color: '#64748b', textAlign: 'center' }}>
+                  For Qloo Hackathon Judges · Android Sideload
+                </span>
+              </div>
             </div>
           </div>
         </div>

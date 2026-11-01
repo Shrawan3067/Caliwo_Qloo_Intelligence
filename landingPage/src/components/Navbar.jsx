@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Sparkles, ShieldCheck } from "lucide-react";
+import { Menu, X, Sparkles, ShieldCheck, Download, Smartphone } from "lucide-react";
 import "./Navbar.css";
 
 export default function Navbar({ onDownloadClick }) {
@@ -16,6 +16,19 @@ export default function Navbar({ onDownloadClick }) {
 
   return (
     <header className={`navbar-header ${isScrolled ? "scrolled" : ""}`}>
+      {/* Top Judge Notice Bar */}
+      <div className="navbar-top-judge-strip">
+        <div className="container strip-container">
+          <span className="strip-pulse-dot"></span>
+          <span className="strip-text">
+            <strong>QLOO AGENTIC AI HACKATHON 2026:</strong> Mobile app testable exclusively on <strong>Android</strong> via direct <strong>.APK build</strong>
+          </span>
+          <a href="#hackathon-judges" className="strip-link">
+            Judge Testing Guide →
+          </a>
+        </div>
+      </div>
+
       <div className="container navbar-container">
         {/* Brand Logo & Hackathon Tag */}
         <a href="#" className="navbar-brand">
@@ -38,13 +51,10 @@ export default function Navbar({ onDownloadClick }) {
           </a>
           <a href="#hackathon-judges" className="nav-link nav-link-judge">
             <ShieldCheck size={14} className="judge-nav-icon" />
-            Judges &amp; APK
+            Judges &amp; Android .APK
           </a>
           <a href="#comparison" className="nav-link">
             Why Caliwo
-          </a>
-          <a href="#pricing" className="nav-link">
-            Pricing
           </a>
           <a href="#faq" className="nav-link">
             FAQ
@@ -53,12 +63,26 @@ export default function Navbar({ onDownloadClick }) {
 
         {/* Header Action Buttons */}
         <div className="header-actions">
+          {/* Direct APK Download for Judges */}
+          <a
+            href="/caliwo-release.apk"
+            download="caliwo-release.apk"
+            className="nav-apk-btn"
+            id="nav-apk-download"
+            title="Download verified Android .APK build (56 MB)"
+          >
+            <Download size={15} className="nav-apk-icon" />
+            <span>Download .APK</span>
+            <span className="nav-apk-badge">Android</span>
+          </a>
+
           <button
             className="btn btn-accent nav-demo-trigger-btn"
             onClick={onDownloadClick}
+            title="Launch interactive browser playground"
           >
-            <Sparkles size={15} />
-            <span>Try Qloo Demo</span>
+            <Sparkles size={14} />
+            <span>Web Demo</span>
           </button>
 
           <button
@@ -74,6 +98,10 @@ export default function Navbar({ onDownloadClick }) {
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
         <div className="mobile-nav-drawer">
+          <div className="mobile-judge-alert">
+            <span className="strip-pulse-dot"></span>
+            <span>Judges: Test on Android via .APK only</span>
+          </div>
           <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>
             How It Works
           </a>
@@ -81,27 +109,35 @@ export default function Navbar({ onDownloadClick }) {
             Taste Intelligence
           </a>
           <a href="#hackathon-judges" onClick={() => setMobileMenuOpen(false)}>
-            Judges &amp; APK
+            Judges &amp; Android .APK
           </a>
           <a href="#comparison" onClick={() => setMobileMenuOpen(false)}>
             Why Caliwo
           </a>
-          <a href="#pricing" onClick={() => setMobileMenuOpen(false)}>
-            Pricing
-          </a>
           <a href="#faq" onClick={() => setMobileMenuOpen(false)}>
             FAQ
           </a>
+
           <div className="mobile-drawer-action">
+            <a
+              href="/caliwo-release.apk"
+              download="caliwo-release.apk"
+              className="btn btn-primary full-width mobile-apk-btn"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Download size={16} />
+              <span>Download Android .APK (56 MB)</span>
+            </a>
             <button
               className="btn btn-accent full-width"
+              style={{ marginTop: "10px" }}
               onClick={() => {
                 setMobileMenuOpen(false);
                 if (onDownloadClick) onDownloadClick();
               }}
             >
-              <Sparkles size={16} />
-              <span>Try Live Qloo Demo</span>
+              <Sparkles size={15} />
+              <span>Try Web Live Playground</span>
             </button>
           </div>
         </div>

@@ -603,10 +603,15 @@ export default function DemoModal({ isOpen, onClose }) {
             <span className="live-dot"></span>
             <span>Live Qloo Intelligence Engine • Production Ready</span>
           </div>
-          <button className="btn btn-primary" onClick={onClose}>
+          <a 
+            href="/caliwo-release.apk" 
+            download="caliwo-release.apk" 
+            className="btn btn-primary" 
+            style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+          >
             <Download size={16} />
-            <span>Get Caliwo App</span>
-          </button>
+            <span>Download Android .APK (56 MB)</span>
+          </a>
         </div>
       </div>
     </div>
