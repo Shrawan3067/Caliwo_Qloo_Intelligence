@@ -61,6 +61,7 @@
 
 # ── react-native-worklets (JSI C++ module) ────────────────────────────
 -keep class com.worklets.** { *; }
+-keep class com.swmansion.worklets.** { *; }
 
 # ── OkHttp (used by axios/fetch polyfill) ─────────────────────────────
 -dontwarn okhttp3.**

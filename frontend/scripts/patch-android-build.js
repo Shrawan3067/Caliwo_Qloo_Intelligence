@@ -91,4 +91,28 @@ if (fs.existsSync(generatedPackageList) && !fs.existsSync(appPackageList)) {
   console.log('Successfully copied ExpoModulesPackageList.kt to android app source.');
 }
 
+// 5. Ensure MainActivity.kt registers HealthConnectPermissionDelegate
+const mainActivityFile = path.join(
+  frontendRoot,
+  'android/app/src/main/java/com/caliwo/ainutritioncoach/MainActivity.kt'
+);
+if (fs.existsSync(mainActivityFile)) {
+  let mainContent = fs.readFileSync(mainActivityFile, 'utf8');
+  if (!mainContent.includes('HealthConnectPermissionDelegate.setPermissionDelegate(this)')) {
+    if (!mainContent.includes('import dev.matinzd.healthconnect.permissions.HealthConnectPermissionDelegate')) {
+      mainContent = mainContent.replace(
+        'import expo.modules.ReactActivityDelegateWrapper',
+        'import dev.matinzd.healthconnect.permissions.HealthConnectPermissionDelegate\nimport expo.modules.ReactActivityDelegateWrapper'
+      );
+    }
+    mainContent = mainContent.replace(
+      'super.onCreate(null)',
+      'super.onCreate(null)\n    HealthConnectPermissionDelegate.setPermissionDelegate(this)'
+    );
+    fs.writeFileSync(mainActivityFile, mainContent, 'utf8');
+    console.log('Successfully patched MainActivity.kt with HealthConnectPermissionDelegate.');
+  }
+}
+
+
 

@@ -31,12 +31,20 @@ export async function requestSleepPermission(): Promise<boolean> {
   }
   if (Platform.OS === "android" && HealthConnect) {
     try {
+      if (typeof HealthConnect.getSdkStatus === "function") {
+        const sdkStatus = await HealthConnect.getSdkStatus();
+        if (sdkStatus !== 3) return false;
+      }
       const isInitialized = await HealthConnect.initialize();
       if (!isInitialized) return false;
-      await HealthConnect.requestPermission([
+      const granted = await HealthConnect.getGrantedPermissions();
+      const alreadyGranted = Array.isArray(granted) && granted.some((p: any) => p.recordType === "SleepSession");
+      if (alreadyGranted) return true;
+      // If not yet granted, request safely
+      const result = await HealthConnect.requestPermission([
         { accessType: 'read', recordType: 'SleepSession' }
       ]);
-      return true;
+      return Array.isArray(result) && result.length > 0;
     } catch {
       return false;
     }
